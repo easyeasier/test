@@ -1,0 +1,12 @@
+注解形式的spring MVC-没有任何xml文件
+
+1.MvcConfig:
+    起到web.xml的作用,@EnableWebMvc开启web功能;内设置viewResolver,用于处理页面的分析
+
+2.WebInitializer implements WebApplicationInitializer :
+    起到ApplicationContext.xml的作用;将ServletContext注入到springContext中;并设置request 路径的分发
+
+3.HelloController:
+    MVC中的C.
+
+4. resources下的/views/index.jsp 是spring boot的页面存放习惯.最终编译到 WEB-INF/classes/views下
