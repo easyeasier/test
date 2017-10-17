@@ -1,4 +1,4 @@
-package wz.test.springmvc._1;
+package wz.test.springmvc._1.controller;
 
 import com.google.common.collect.Maps;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import java.util.Map;
 @Controller
 //@RestController   等价于 @Controller和ResponseBody
 public class HelloController {
-    @RequestMapping("/index")
+    @RequestMapping(value = {"/", "/index"})
     public String index() {
         return "index";
     }

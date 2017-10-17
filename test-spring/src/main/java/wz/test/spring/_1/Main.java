@@ -10,7 +10,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * 注解类代替xml注入bean
  * 1.Bean类需要 @Service @Component等注解
  * 2.需要config类,@Configuration 相当于xml注解,@ComponentScan 扫描相关包
- * 3.需要用AnnotationConfigApplicationContext(config.class)
+ * 3.png.需要用AnnotationConfigApplicationContext(config.class)
  */
 public class Main {
 
