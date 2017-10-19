@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+    <artifactId>test</artifactId>
+    <groupId>wangz</groupId>
+    <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <!--springboot的依赖,如果是个人项目,没有公司父pom的话就可以使用下面的父pom-->
+    <!--如果使用公司的父pom,需要在父pom中引入spring-boot-dependencies, 详见父pom-->
+    <!--<parent>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-parent</artifactId>-->
+        <!--<version>1.5.8.RELEASE</version>-->
+    <!--原4.2.6版本spring没有类ObjectProvider.-->
+    <!--</parent>-->
+
+    <artifactId>test-springboot</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

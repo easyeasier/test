@@ -19,6 +19,7 @@
         <module>test-comet</module>
         <module>test-dubbo</module>
         <module>test-spring</module>
+        <module>test-springboot</module>
     </modules>
 
     <properties>
@@ -32,12 +33,30 @@
         <logback.version>1.1.7</logback.version>
         <rocketmq.version>3.2.6</rocketmq.version>
         <slf4j.version>1.7.20</slf4j.version>
-        <spring.version>4.2.6.RELEASE</spring.version>
+        <spring.version>4.3.12.RELEASE</spring.version>
         <lombok.version>1.16.10</lombok.version>
         <httpclient.version>4.5.1</httpclient.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+
+    <!--springboot的依赖,如果是个人项目,没有公司父pom的话就可以使用下面的父pom-->
+    <!--<parent>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-parent</artifactId>-->
+        <!--<version>1.5.8.RELEASE</version>-->
+    <!--</parent>-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>1.5.8.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
 
@@ -51,7 +70,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>4.2.6.RELEASE</version>
+            <version>4.3.12.RELEASE</version>
             <scope>test</scope>
         </dependency>
 
@@ -82,19 +101,19 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.2.6.RELEASE</version>
+            <version>4.3.12.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>4.2.6.RELEASE</version>
+            <version>4.3.12.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>4.2.6.RELEASE</version>
+            <version>4.3.12.RELEASE</version>
         </dependency>
 
         <dependency>

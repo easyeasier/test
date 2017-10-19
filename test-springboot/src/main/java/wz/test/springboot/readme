@@ -1,0 +1,6 @@
+1.resource/config/application.properties
+2.banner
+3.Main
+4.@Value
+5.@ConfigurationProperties(prefix = "Author",value = "classpath:author.properties") 自定义配置,直接注入bean属性中 .需要查文档
+6.spring.profiles.active
