@@ -1,4 +1,4 @@
-package wz.test.springboot.bean;
+package wz.test.springboot._1.bean;
 
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
