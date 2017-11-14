@@ -2,10 +2,7 @@ package wz.test.jdk.executor;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Created by wangz on 17-7-7.
@@ -15,7 +12,7 @@ public class ScheduledExecutorTest {
     volatile int number = 1;
 
     static {
-        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("wz.test.jdk.Test-%d").setDaemon(true).build();
+        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("wz.test.jdk.DescribeVerify-%d").setDaemon(true).build();
         pool = Executors.newScheduledThreadPool(2, threadFactory);
 //        pool = Executors.newScheduledThreadPool(1, threadFactory);
     }

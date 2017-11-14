@@ -17,7 +17,7 @@ public class AnnotationTest {
         Method[] methods = clz.getDeclaredMethods();
         for(Method m : methods){
             if(m.isAnnotationPresent(Test.class)){
-                System.out.print("wz.test.jdk.Test ANNOTATION : ");
+                System.out.print("wz.test.jdk.DescribeVerify ANNOTATION : ");
                 m.invoke(test);
             }
 

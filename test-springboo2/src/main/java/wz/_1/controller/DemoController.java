@@ -1,8 +1,6 @@
-package wz;
+package wz._1.controller;
 
 import com.google.common.collect.Lists;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,9 +8,11 @@ import wz._1.model.Person;
 
 import java.util.List;
 
-@SpringBootApplication
+/**
+ * Created by wangz on 17-10-20.
+ */
 @Controller
-public class ThymeleafController {
+public class DemoController {
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -29,10 +29,5 @@ public class ThymeleafController {
         model.addAttribute("singlePerson", singlePerson);
         model.addAttribute("people", people);
         return "index";
-    }
-
-
-    public static void main(String[] args) {
-        SpringApplication.run(ThymeleafController.class, args);
     }
 }

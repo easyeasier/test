@@ -36,7 +36,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     /**
      * 添加静态资源映射
      * 可通过
-     *
      * @param registry
      */
     @Override

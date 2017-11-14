@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by wangz on 17-10-16.
@@ -14,7 +15,7 @@ import java.util.Map;
 @Controller
 //@RestController   等价于 @Controller和ResponseBody
 public class HelloController {
-    @RequestMapping(value = {"/", "/index"})
+    @RequestMapping(value = {"/index"})
     public String index() {
         return "index";
     }
@@ -34,5 +35,17 @@ public class HelloController {
         data.put("key", "value");
 
         return data;
+    }
+
+    static AtomicInteger count = new AtomicInteger(0);
+
+    @RequestMapping(value = "/count")
+    @ResponseBody
+    public String hello() {
+        count.getAndIncrement();
+        System.out.println(count.get());
+        while (true) {
+
+        }
     }
 }
