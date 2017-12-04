@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class JumpGameII {
     public static void main(String[] args) {
-//        int[] nums = {2, 3, 1, 1, 4};
-        int[] nums = {1,2,1,1,1};
+        int[] nums = {2, 3, 1, 1, 4};
+//        int[] nums = {1,2,1,1,1};
         System.out.println(jump(nums));
     }
 

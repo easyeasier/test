@@ -44,7 +44,7 @@ public class PrintABC {
                     e.printStackTrace();
                 }
                 //防止过多输出
-                if (i.get() == 10) break;
+                if (i.get() == 15) break;
                 System.out.println("result " + symbol);
                 i.getAndIncrement();
 //            System.out.println(i.get());

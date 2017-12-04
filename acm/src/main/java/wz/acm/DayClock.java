@@ -12,6 +12,9 @@ public enum DayClock {
     SATURDAY(ClockType.WEEKEND),
     SUNDAY(ClockType.WEEKEND);
 
+    static {
+        System.out.println("DayClock init.");
+    }
     private final ClockType clockType;
 
     DayClock(ClockType clockType) {
@@ -37,12 +40,15 @@ public enum DayClock {
         };
 
         abstract String getClock();
+        static {
+            System.out.println("clocktype init.");
+        }
     }
 
     public static void main(String[] args) {
-        for(DayClock dayClock : DayClock.values()){
-            dayClock.clock();
-        }
+//        for(DayClock dayClock : DayClock.values()){
+//            dayClock.clock();
+//        }
     }
 
 }

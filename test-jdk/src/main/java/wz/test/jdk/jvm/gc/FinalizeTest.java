@@ -21,16 +21,16 @@ public class FinalizeTest {
     /**
      * 如果不覆盖，不会被执行
      * 如果覆盖，第一次gc会调用执行，第二次不再执行
-     * @param args
      * @throws InterruptedException
      */
-//    @Override
-//    public void finalize() throws Throwable {
-//        super.finalize();
-//        System.out.println("finalize method executed...");
+    @Override
+    public void finalize() throws Throwable {
+        super.finalize();
+        System.out.println("finalize method executed...");
 
-//        FinalizeTest.INSTANCE = this;
-//    }
+        FinalizeTest.INSTANCE = this;
+        throw new RuntimeException("error....");
+    }
 
     public static void main(String[] args) throws InterruptedException {
         INSTANCE = new FinalizeTest();

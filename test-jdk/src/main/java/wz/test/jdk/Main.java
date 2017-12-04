@@ -19,14 +19,12 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
-           Map<String,String> map1 = Maps.newHashMap();
-           map1.put("1","a");
-
-           Map<String,String> map2 = Maps.newHashMap(map1);
-        System.out.println(map2);
+//           Map<String,String> map1 = Maps.newHashMap();
+//           map1.put("1","a");
+//
+//           Map<String,String> map2 = Maps.newHashMap(map1);
+//        System.out.println(map2);
     }
-
 
 
     public static int count(int[] arr, int key) {
@@ -41,15 +39,15 @@ public class Main {
         while (iterator.hasNext()) {
             int left = iterator.next().getKey();
             if (map.get(key + left) != null) {
-                map.put(left,1);
+                map.put(left, 1);
             }
         }
 
         int count = 0;
         iterator = map.entrySet().iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             int value = iterator.next().getValue();
-            if(value == 1){
+            if (value == 1) {
                 count++;
             }
         }

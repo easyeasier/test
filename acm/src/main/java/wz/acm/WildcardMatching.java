@@ -9,8 +9,9 @@ public class WildcardMatching {
 //        String s="aa",p="aa";
 //        String s="aaa",p="aa";
 //        String s="aa",p="*";
-        String s = "mississippi", p = "m*issi*iss*";
+//        String s = "mississippi", p = "m*issi*iss*";
 //        String s = "mississippi", p = "m*issi*ppi*";
+        String s = "abca", p = "b*";
 //        String s="aa",p="a*";
 //        String s="aa",p="?*";
 //        String s="aab",p="c*a*b";
