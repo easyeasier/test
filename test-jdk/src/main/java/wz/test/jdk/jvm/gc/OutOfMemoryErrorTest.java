@@ -41,7 +41,7 @@ public class OutOfMemoryErrorTest {
         List<String> list = new ArrayList<>();
         int i=0;
         while(true){
-            list.add(String.valueOf(i++).intern());
+//            list.add(String.valueOf(i++).intern());
         }
     }
 

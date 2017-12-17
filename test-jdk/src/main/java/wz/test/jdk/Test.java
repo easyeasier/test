@@ -15,10 +15,10 @@ import java.util.Map;
  */
 public class Test {
     public static void main(String[] args) {
-        String[] arr = new String[]{};
-        System.out.println(arr.getClass());
-        System.out.println(arr.getClass());
-//        System.out.println(arr.getClass() instanceof Object);
+        int hash = 0;
+
+        System.out.println("1".hashCode() );
+        System.out.println("4".hashCode() );
     }
 
 }
