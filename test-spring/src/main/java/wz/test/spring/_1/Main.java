@@ -15,12 +15,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DiConfig.class);
 
         UseFunctionService service = context.getBean(UseFunctionService.class);
 
         System.out.println(service.sayHello("wz"));
-        context.close();
+        while(true){}
+//        context.close();
     }
 }

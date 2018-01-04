@@ -2,6 +2,7 @@ package wz.test.springboot._1.bean;
 
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,4 +15,9 @@ public class Author {
     private String name;
     @Getter
     private int age;
+
+    @Scheduled(fixedRate = 1000 * 10)
+    public void task(){
+        System.out.println("执行。。。"+System.currentTimeMillis());
+    }
 }

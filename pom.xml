@@ -20,6 +20,7 @@
         <module>test-dubbo</module>
         <module>test-spring</module>
         <module>test-springboot</module>
+        <module>test-hadoop</module>
     </modules>
 
     <properties>
@@ -30,9 +31,8 @@
         <fastjson.version>1.2.16</fastjson.version>
         <guava.version>19.0</guava.version>
         <junit.version>4.12</junit.version>
-        <logback.version>1.1.7</logback.version>
+        <logback.version>1.2.3</logback.version>
         <rocketmq.version>3.2.6</rocketmq.version>
-        <slf4j.version>1.7.20</slf4j.version>
         <spring.version>4.3.12.RELEASE</spring.version>
         <lombok.version>1.16.10</lombok.version>
         <httpclient.version>4.5.1</httpclient.version>
@@ -134,45 +134,10 @@
             <version>${guava.version}</version>
         </dependency>
 
-        <!-- for logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-        <!-- wz.test.commonmmon-logging 实际调用slf4j -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <!-- java.util.logging 实际调用slf4j -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
     </dependencies>
 </project>
