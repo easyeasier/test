@@ -1,5 +1,6 @@
 package wz.test.jdk;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 
 import java.io.IOException;
@@ -12,22 +13,7 @@ import java.util.stream.Collectors;
  */
 public class Test {
     public static void main(String[] args) throws IOException {
-        int num = 2;
-        Map<String, Integer> map = Maps.newHashMap();
-        map.put("a", 2);
-        map.put("b", 2);
-        map.put("c", 3);
-        map.put("d", 4);
-        map.put("e", 5);
-        map.put("f", 5);
 
-        List<String> ls = map.entrySet().stream().sorted((e1, e2) -> e1.getValue() > e2.getValue() ? -1 : 1)
-                .limit(4).map(entry -> entry.getKey()).collect(Collectors.toList());
-        List<String> ls2 = map.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue))
-                .limit(4).map(entry -> entry.getKey()).collect(Collectors.toList());
-
-        System.out.println(ls);
-        System.out.println(ls2);
     }
 
 

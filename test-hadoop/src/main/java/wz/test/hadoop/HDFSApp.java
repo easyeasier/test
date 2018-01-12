@@ -1,4 +1,4 @@
-package wz.test;
+package wz.test.hadoop;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;

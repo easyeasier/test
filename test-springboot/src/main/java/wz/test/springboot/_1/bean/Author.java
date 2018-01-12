@@ -16,8 +16,8 @@ public class Author {
     @Getter
     private int age;
 
-    @Scheduled(fixedRate = 1000 * 10)
+    @Scheduled(cron = "0 * * * * *")
     public void task(){
-        System.out.println("执行。。。"+System.currentTimeMillis());
+        System.out.println("执行。。。"+System.currentTimeMillis() + ", thread : "+ Thread.currentThread());
     }
 }

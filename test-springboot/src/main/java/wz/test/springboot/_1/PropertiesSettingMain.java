@@ -25,6 +25,7 @@ public class PropertiesSettingMain {
     }
 
     public static void main(String[] args) {
+        System.out.println("main : " + Thread.currentThread());
         SpringApplication.run(PropertiesSettingMain.class, args);
     }
 }
