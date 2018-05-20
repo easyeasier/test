@@ -1,3 +1,4 @@
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,9 +11,10 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * Created by liyiguang on 16/5/26.
  */
+@Slf4j
 public class StopWatch {
 
-    private static Logger LOG = LoggerFactory.getLogger(StopWatch.class);
+//    private static Logger log = LoggerFactory.getLogger(StopWatch.class);
 
     private long startTime;
 
@@ -49,7 +51,7 @@ public class StopWatch {
 
     public void log() {
         StringBuilder stringBuilder = createLog();
-        LOG.warn(stringBuilder.toString());
+        log.warn(stringBuilder.toString());
     }
 
     public void logSlow(long slow) {
@@ -57,7 +59,7 @@ public class StopWatch {
         long totalElapsedTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
         if (totalElapsedTime > slow) {
             StringBuilder stringBuilder = createLog();
-            LOG.warn(stringBuilder.toString());
+            log.warn(stringBuilder.toString());
         }
     }
 

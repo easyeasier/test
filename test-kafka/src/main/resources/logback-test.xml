@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+logback读取配置顺序 logback-test.xml   -> logback.xml
+    1. <configuration> scan 默认true（表示配置文件发生变化时，重新加载）； scanPeriod = "60 seconds" 默认60s,表示多长时间检测一次
+
+    2. <log> 就3个属性，name 指定生效的包或者类， level表示级别，additivity 表示是否像上级logger传递默认true
+        可以有都个appender-ref,表示这个appender会添加到这个logger
+    <logger name="wz.*" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="fileAppender"/>
+       </logger>
+
+    3.<appender> 日志的输出格式和归档格式等
+
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">   标准输出， name在logger中被调用
+        <appender name="FILE" class="ch.qos.logback.core.FileAppender"> 文件输出
+        <appender name="ROOLINGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">    滚动日志输出，根据滚动规则，生辰果不同的日志
+    4. RollingFileAppender ：
+    <appender name="BPMLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.home}/logs/bpm.log</file>  #当前文件路径
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> #按时间滚动
+            <fileNamePattern>${catalina.home}/logs/bpm.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>  #输出格式 logger指类名
+             <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{12} %X{traceId} %X{userId} %msg%n  //%n输出平台相关的换行符
+            </pattern>
+        </encoder>
+
+        //filter有多种，这里只写临界值的，即高于这个level的都被留下，其他过略。 基本业务logger中放两个appender，以个info，以个error，把error单独打印出来
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+-->
+<configuration scan="true">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="PRODUCER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>C:\Users\wangz\Documents\git\test\test-kafka\src\main\resources\logs\producer.log</file>
+        <append>false</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                C:\Users\wangz\Documents\git\test\test-kafka\src\main\resources\logs\producer.%d{yyyy-MM-dd}
+                .log.zip
+            </fileNamePattern>
+            <maxHistory>1</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder><!-- 必须指定，否则不会往文件输出内容 -->
+            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="CONSUMER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>C:\Users\wangz\Documents\git\test\test-kafka\src\main\resources\logs\consumer.log</file>
+        <append>false</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                C:\Users\wangz\Documents\git\test\test-kafka\src\main\resources\logs\consumer.%d{yyyy-MM-dd}
+                .log.zip
+            </fileNamePattern>
+            <maxHistory>1</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder><!-- 必须指定，否则不会往文件输出内容 -->
+            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <file>C:\Users\wangz\Documents\git\test\test-kafka\src\main\resources\logs\error.log</file>
+        <append>false</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                C:\Users\wangz\Documents\git\test\test-kafka\src\main\resources\logs\error.%d{yyyy-MM-dd}
+                .log.zip
+            </fileNamePattern>
+            <maxHistory>1</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder><!-- 必须指定，否则不会往文件输出内容 -->
+            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="PRODUCER_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!--blocking queue的深度-->
+        <queueSize>2048</queueSize>
+        <appender-ref ref="PRODUCER"/>
+        <includeCallerData>false</includeCallerData>
+    </appender>
+
+    <appender name="CONSUMER_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!--blocking queue的深度-->
+        <queueSize>2048</queueSize>
+        <appender-ref ref="CONSUMER"/>
+        <includeCallerData>false</includeCallerData>
+    </appender>
+    <logger name="wz" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="PRODUCER_ASYNC"/>-->
+        <appender-ref ref="ERROR"/>
+    </logger>
+
+    <logger name="wz.test.kafka.manager.consume" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="CONSUMER_ASYNC"/>-->
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
