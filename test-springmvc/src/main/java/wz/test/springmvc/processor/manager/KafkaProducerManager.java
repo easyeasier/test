@@ -2,6 +2,7 @@ package wz.test.springmvc.processor.manager;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wz.test.springmvc.exception.IndexExceptionCode;
@@ -22,7 +23,9 @@ public class KafkaProducerManager {
 
     @PostConstruct
     public void init() {
-        pool = new GenericObjectPool(producerFactory);
+        GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
+        poolConfig.setMinIdle(1);
+        pool = new GenericObjectPool(producerFactory, new GenericObjectPoolConfig());
     }
 
     public KafkaIndexProducer getProducer() {

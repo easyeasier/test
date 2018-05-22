@@ -1,15 +1,14 @@
 package wz.test.jdk;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.Maps;
-import com.google.gson.JsonObject;
+import com.google.common.collect.Sets;
+import org.postgresql.ds.PGSimpleDataSource;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.BlockingQueue;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 /**
@@ -17,12 +16,11 @@ import java.util.stream.Collectors;
  * Created by wangz on 17-11-14.
  */
 public class Test {
-    public static void main(String[] args) throws IOException, InterruptedException {
-        Child child = new Child();
-        System.out.println(child);
-        System.out.println(child);
+    public static void main(String[] args) {
+        String path = "/configs/test";
+        System.out.println(path.lastIndexOf("/"));
+        System.out.println(path.substring(path.lastIndexOf("/")+1));
     }
 
-    public static class Child extends Test{}
 }
 

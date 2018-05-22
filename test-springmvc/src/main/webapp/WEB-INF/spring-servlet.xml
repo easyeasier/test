@@ -13,7 +13,21 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 配置扫描的包 -->
-    <context:component-scan base-package="wz.test.springmvc">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    <context:component-scan base-package="wz.test.springmvc.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+
+    <!-- 注册HandlerMapper、HandlerAdapter两个映射类 -->
+    <mvc:annotation-driven/>
+
+    <!-- 访问静态资源 -->
+    <mvc:default-servlet-handler/>
+
+    <!-- 视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/view/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+
 </beans>

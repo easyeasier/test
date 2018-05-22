@@ -69,7 +69,7 @@ public class IndexProducerProcessor {
             KafkaIndexProducer producer = manager.getProducer();
             //todo 处理data
 //        producer.produce(topic, null, null, null, defaultCallback());
-            producer.produce(topic, null, null);
+            producer.produce(topic, data.getString("key"), data.getString("value"));
             manager.returnProducer(producer);
         }
     }

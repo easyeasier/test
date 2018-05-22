@@ -7,13 +7,13 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.stereotype.Service;
+import wz.test.springmvc.service.TestConsumerService;
 import wz.test.springmvc.util.LoadConfigUtil;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -21,7 +21,7 @@ public class KafkaConsumerManager {
 
     static final String CONFIG_FILE_NAME = "kafka_consumer.properties";
     // key=topic
-    Map<String, ConsumerTask> consumers = new ConcurrentHashMap<>();
+    ConcurrentHashMap<String, ConsumerTask> consumers = new ConcurrentHashMap<>();
 
     Properties kafkaConsumerConfig;
 
@@ -37,45 +37,50 @@ public class KafkaConsumerManager {
         }
     }
 
-    public synchronized void startConsumerTasks(Set<String> topics) {
-        Set<String> unStartedServers = topics.stream().filter(topic -> !consumers.containsKey(topic) || !consumers.get
-                (topic).isOnServer()).collect(Collectors.toSet());
-        List<ConsumerTask> tasks = unStartedServers.stream().map(topic -> new ConsumerTask(topic, kafkaConsumerConfig))
-                .collect(Collectors.toList());
-
-        for (ConsumerTask task : tasks) {
-            try {
-                new Thread(task).start();
-                consumers.put(task.getTopic(), task);
-            } catch (Exception e) {
-                log.error("start consumer task failed . topic = {}", task.getTopic());
-            }
+    public synchronized void startConsumerTask(String topic) {
+        ConsumerTask task = consumers.get(topic);
+        if (task != null && task.hasStarted()) {
+            log.info("the kafka consumer has started! topic = {}");
+            return;
+        } else if (task != null && task.hasStop()) {
+            closeOld(task);
         }
+
+        task = new ConsumerTask(topic, kafkaConsumerConfig);
+        new Thread(task).start();
+        consumers.put(topic, task);
+    }
+
+    private void closeOld(ConsumerTask task) {
+        task.close();
     }
 
     @Getter
     @Setter
-    static class ConsumerTask extends Thread {
+    static class ConsumerTask implements Runnable {
         volatile boolean onServer;
         final String topic;
+        Properties kafkaConsumerConfig;
         KafkaConsumer<String, String> consumer;
 
         public ConsumerTask(String topic, Properties kafkaConsumerConfig) {
             this.topic = topic;
-            this.consumer = new KafkaConsumer<>(kafkaConsumerConfig);
+            this.kafkaConsumerConfig = kafkaConsumerConfig;
         }
 
         @Override
         public void run() {
-            onServer = true;
+            setStartFlag();
+            consumer = new KafkaConsumer<>(kafkaConsumerConfig);
             log.info("start kafka index  consumer task . topic={}", topic);
             while (onServer) {
-
                 try {
+                    consumer.subscribe(Arrays.asList(topic));
                     ConsumerRecords<String, String> records = consumer.poll(1000);
                     Iterator<ConsumerRecord<String, String>> iterator = records.iterator();
                     while (iterator.hasNext()) {
-                        //todo index service
+                        //todo service
+                        TestConsumerService.consume(iterator.next());
                     }
 
                 } catch (Exception e) {
@@ -86,13 +91,31 @@ public class KafkaConsumerManager {
             }
         }
 
-        public boolean isOnServer() {
+        public boolean hasStarted() {
             return onServer;
         }
 
+        public boolean hasStop() {
+            return !onServer;
+        }
+
+        public void setStartFlag() {
+            onServer = true;
+        }
+
         public void close() {
-            onServer = false;
-            consumer.close();
+            try {
+                onServer = false;
+                if (consumer != null) {
+                    consumer.close();
+                }
+                log.info("close old consumer task. topic = {}", topic);
+            } catch (Exception e) {
+                log.error("consumer close error !topic ={},", topic, e);
+            } finally {
+                consumer = null;
+            }
         }
     }
+
 }

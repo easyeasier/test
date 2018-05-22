@@ -100,11 +100,10 @@ logback读取配置顺序 logback-test.xml   -> logback.xml
     </appender>
 
     <appender name="CONSUMER_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
-        <!--blocking queue的深度-->
-        <queueSize>2048</queueSize>
         <appender-ref ref="CONSUMER"/>
         <includeCallerData>false</includeCallerData>
     </appender>
+
     <logger name="wz" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
         <!--<appender-ref ref="PRODUCER_ASYNC"/>-->

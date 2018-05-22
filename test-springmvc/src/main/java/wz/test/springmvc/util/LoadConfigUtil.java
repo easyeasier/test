@@ -7,7 +7,7 @@ public class LoadConfigUtil {
     static String basePath;
 
     static {
-        basePath = LoadConfigUtil.class.getResource("/spring/").getPath();
+        basePath = LoadConfigUtil.class.getResource("/conf/").getPath();
     }
 
     public static Properties getConfig(String fileName) throws IOException {

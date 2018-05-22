@@ -4,10 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.PooledObjectFactory;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
-import org.apache.kafka.clients.producer.Partitioner;
-import org.apache.kafka.common.Cluster;
 import org.springframework.stereotype.Service;
-import wz.test.springmvc.processor.bean.KafkaIndexProducer;
 import wz.test.springmvc.util.LoadConfigUtil;
 
 import javax.annotation.PostConstruct;
